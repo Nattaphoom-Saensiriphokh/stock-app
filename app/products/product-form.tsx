@@ -21,7 +21,7 @@ type Props = {
 };
 
 const inputClass =
-  "w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:bg-gray-100";
+  "w-full rounded-lg border border-emerald-200 bg-white px-3 py-2 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-slate-100";
 
 export default function ProductForm({ action, product, submitLabel }: Props) {
   const [state, formAction, pending] = useActionState<FormState, FormData>(
@@ -39,12 +39,12 @@ export default function ProductForm({ action, product, submitLabel }: Props) {
       <p className="mt-1 text-sm text-red-600">{state.errors[name]![0]}</p>
     );
 
-  const label = "mb-2 block text-sm font-medium text-gray-700";
+  const label = "mb-2 block text-sm font-medium text-slate-700";
 
   return (
     <form
       action={formAction}
-      className="space-y-5 rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+      className="space-y-5 rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm"
     >
       <div>
         <label htmlFor="sku" className={label}>รหัสสินค้า (SKU)</label>
@@ -88,15 +88,16 @@ export default function ProductForm({ action, product, submitLabel }: Props) {
         </div>
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-gray-700">
+      <label className="flex items-center gap-2 text-sm text-slate-700">
         <input
           type="checkbox"
           name="status"
+          className="h-4 w-4 accent-emerald-600"
           defaultChecked={
             state.values ? state.values.status === "on" : (product?.status ?? true)
           }
-          disabled={pending}
 
+          disabled={pending}
         />
         เปิดขายสินค้านี้
       </label>
@@ -105,13 +106,13 @@ export default function ProductForm({ action, product, submitLabel }: Props) {
         <button
           type="submit"
           disabled={pending}
-          className="rounded-md bg-blue-600 px-5 py-2 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+          className="rounded-lg bg-emerald-600 px-5 py-2 font-medium text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-400"
         >
           {pending ? "กำลังบันทึก..." : submitLabel}
         </button>
         <a
           href="/products"
-          className="rounded-md border border-gray-300 px-4 py-2 font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-lg border border-emerald-200 px-5 py-2 font-medium text-emerald-700 transition hover:bg-emerald-50"
         >
           ยกเลิก
         </a>

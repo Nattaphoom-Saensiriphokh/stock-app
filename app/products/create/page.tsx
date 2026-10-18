@@ -7,7 +7,10 @@ export default async function CreateProductPage() {
 
   return (
     <main className="mx-auto max-w-2xl p-6">
-      <h1 className="mb-6 text-3xl font-bold text-gray-900">เพิ่มสินค้า</h1>
+      <a href="/products" className="text-sm text-emerald-700 hover:underline">
+        ← กลับรายการสินค้า
+      </a>
+      <h1 className="mb-6 mt-2 text-3xl font-bold text-emerald-950">เพิ่มสินค้า</h1>
       <ProductForm action={createProduct} submitLabel="บันทึก" />
     </main>
   );

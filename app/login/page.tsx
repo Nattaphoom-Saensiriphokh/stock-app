@@ -31,27 +31,42 @@ export default function LoginPage() {
   }
 
 
-  const input = "w-full rounded border border-gray-300 p-2";
+  const input =
+    "w-full rounded-lg border border-emerald-200 px-3 py-2 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100";
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow">
-        <h1 className="mb-6 text-2xl font-bold">เข้าสู่ระบบ</h1>
+    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-emerald-100 via-emerald-50 to-white px-4">
+      <div className="w-full max-w-md rounded-2xl border border-emerald-100 bg-white p-8 shadow-lg">
+        <div className="mb-6 text-center">
+          <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500 text-2xl text-white">
+            📦
+          </span>
+          <h1 className="text-2xl font-bold text-emerald-950">เข้าสู่ระบบ</h1>
+          <p className="mt-1 text-sm text-slate-500">ระบบจัดการสต็อกสินค้า</p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className={input} required />
           <input type="password" placeholder="รหัสผ่าน" value={password} onChange={(e) => setPassword(e.target.value)} className={input} required />
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && (
+            <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">{error}</p>
+          )}
 
-          <button type="submit" className="w-full rounded bg-blue-600 p-2 text-white hover:bg-blue-700">
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-emerald-600 p-2.5 font-medium text-white transition hover:bg-emerald-700"
+          >
             เข้าสู่ระบบ
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p className="mt-6 text-center text-sm text-slate-600">
           ยังไม่มีบัญชี?{" "}
-          <Link href="/signup" className="font-medium text-blue-600 hover:underline">สมัครสมาชิก</Link>
+
+          <Link href="/signup" className="font-medium text-emerald-700 hover:underline">
+            สมัครสมาชิก
+          </Link>
         </p>
       </div>
     </main>

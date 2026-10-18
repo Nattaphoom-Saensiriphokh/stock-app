@@ -2,8 +2,8 @@ import { CATEGORIES } from "./constants";
 import type { ProductFilters } from "./query";
 
 const field =
-  "w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-blue-500";
-const label = "mb-1 block text-sm font-medium text-gray-700";
+  "w-full rounded-lg border border-emerald-200 bg-white px-3 py-2 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100";
+const label = "mb-1 block text-sm font-medium text-slate-700";
 
 export default function SearchForm({
   search = "",
@@ -14,7 +14,7 @@ export default function SearchForm({
   return (
     <form
       method="GET"
-      className="mb-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+      className="mb-6 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm"
     >
       <div className="grid gap-4 md:grid-cols-4">
         <div>
@@ -30,6 +30,7 @@ export default function SearchForm({
 
         <div>
           <label htmlFor="category" className={label}>หมวดหมู่</label>
+
           <select id="category" name="category" defaultValue={category} className={field}>
             <option value="">ทุกหมวดหมู่</option>
             {CATEGORIES.map((c) => (
@@ -59,13 +60,14 @@ export default function SearchForm({
       <div className="mt-4 flex gap-2">
         <button
           type="submit"
-          className="rounded-md bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700"
+          className="rounded-lg bg-emerald-600 px-4 py-2 font-medium text-white transition hover:bg-emerald-700"
         >
           ค้นหา
+
         </button>
         <a
           href="/products"
-          className="rounded-md border border-gray-300 px-4 py-2 font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-lg border border-emerald-200 px-4 py-2 font-medium text-emerald-700 transition hover:bg-emerald-50"
         >
           ล้าง
         </a>
