@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { productSchema } from "@/app/products/validation";
 import { findProducts } from "@/app/products/query";
 import { apiGuard } from "@/app/lib/api-guard";
+import { isUniqueViolation } from "@/app/lib/prisma-errors";
 
 export async function GET(request: Request) {
   const denied = await apiGuard(["ADMIN", "STAFF", "USER"]);
@@ -48,7 +49,8 @@ export async function POST(request: Request) {
     const product = await prisma.product.create({ data: result.data });
     return NextResponse.json(product, { status: 201 });
   } catch (e: any) {
-    if (e?.code === "P2002") {
+    console.error("POST /api/products failed:", e);
+    if (isUniqueViolation(e)) {
       return NextResponse.json({ message: "รหัสสินค้านี้มีอยู่แล้ว" }, { status: 409 });
     }
     return NextResponse.json({ message: "ไม่สามารถสร้างสินค้าได้" }, { status: 500 });

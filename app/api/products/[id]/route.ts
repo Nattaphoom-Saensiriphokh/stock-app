@@ -2,6 +2,7 @@ import prisma from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 import { productSchema } from "@/app/products/validation";
 import { apiGuard } from "@/app/lib/api-guard";
+import { isUniqueViolation } from "@/app/lib/prisma-errors";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -63,11 +64,11 @@ export async function PUT(request: Request, context: RouteContext) {
     });
     return NextResponse.json(product);
   } catch (e: any) {
-
+    console.error("PUT /api/products/[id] failed:", e);
     if (e?.code === "P2025") {
       return NextResponse.json({ message: "ไม่พบสินค้า" }, { status: 404 });
     }
-    if (e?.code === "P2002") {
+    if (isUniqueViolation(e)) {
       return NextResponse.json({ message: "รหัสสินค้านี้มีอยู่แล้ว" }, { status: 409 });
     }
     return NextResponse.json({ message: "ไม่สามารถแก้ไขสินค้าได้" }, { status: 500 });
